@@ -5,7 +5,6 @@ body {
   padding: 0;
 }
 
-
 h1 {
   text-align: center;
   background-color: #0074d9;
@@ -13,7 +12,6 @@ h1 {
   padding: 20px;
   margin: 0;
 }
-
 
 form {
   /* display: flex; */
@@ -42,7 +40,6 @@ i {
   color: #404041;
   opacity: 2;
 }
-
 
 ul {
   list-style: none;
@@ -151,5 +148,3 @@ button {
   color: #333;
   cursor: pointer;
 }
-
-
