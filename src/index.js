@@ -3,8 +3,9 @@ import './styles/main.css';
 import {createTask} from './modules/AddTodo.js';
 import {handleUpdateBtnClick } from './modules/EditTodo.js';
 import { readTask, updateTask, deleteTask } from './modules/localStorage.js';
+import  {handleDragStart, handleDragOver,handleDrop } from './modules/moveDrag.js'
 
-const task=updateTask();
+
 
 const todoInput = document.querySelector('#todo-input');
 const todoList = document.querySelector('#todo-list');
@@ -25,17 +26,21 @@ function renderTasks() {
       <button type="button" class="delete-btn" data-index="${index}"><i class='far fa-trash-alt'></i></button>
       <i class='fas fa-ellipsis-v'></i>
     `;
+    li.draggable = true;
+    li.addEventListener('dragstart', handleDragStart);
+    li.addEventListener('dragover', handleDragOver);
+    li.addEventListener('drop', handleDrop);
     li.style.display = 'flex';
     li.style.alignItems = 'center';
     const taskText = li.querySelector('.task-text');
     taskText.style.flexGrow = '1';
     taskText.style.display = 'block';
     const deleteBtn = li.querySelector('.delete-btn');
-    deleteBtn.style.display = 'none'; // Initially hide the delete button
+    deleteBtn.style.display = 'none'; 
     deleteBtn.addEventListener('click', handleDeleteBtnClick);
     const updateBtn = li.querySelector('.update-btn');
     updateBtn.style.width = '40px';
-    updateBtn.style.display = 'none'; // Initially hide the update button
+    updateBtn.style.display = 'none'; 
     updateBtn.addEventListener('click', handleUpdateBtnClick);
     const ellipsisIcon = li.querySelector('.fa-ellipsis-v');
     ellipsisIcon.addEventListener('click', () => {
@@ -45,9 +50,6 @@ function renderTasks() {
     todoList.appendChild(li);
   });
 }
-
-
-
 
 // Handle click event on the delete button
 function handleDeleteBtnClick(event) {
@@ -74,3 +76,5 @@ deleteBtn.addEventListener('click', () => {
 });
 
 renderTasks();
+readTask();
+updateTask();
