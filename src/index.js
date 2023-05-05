@@ -30,7 +30,7 @@ function renderTasks() {
 
 function handleUpdateBtnClick(event) {
   const { index } = event.target.dataset;
-  const newTaskText = HTMLInputElement(index);
+  const newTaskText = prompt(index);
   if (newTaskText) {
     updateTask(index, newTaskText);
     renderTasks();

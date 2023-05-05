@@ -162,7 +162,9 @@ li:last-child {
 }
 
 #update {
-  display: none;
+  display:none;
+  position: absolute;
+  margin-left: 25%;
 }
 
 .delete-btn {
