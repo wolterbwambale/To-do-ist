@@ -1,8 +1,6 @@
 /* eslint-disable*/
 import './styles/main.css';
-import {
-  createTask, readTask, updateTask, deleteTask,
-} from './app.js';
+import {createTask, readTask, updateTask, deleteTask,} from './app.js';
 
 const todoInput = document.querySelector('#todo-input');
 const todoList = document.querySelector('#todo-list');
