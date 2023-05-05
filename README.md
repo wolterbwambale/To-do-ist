@@ -19,6 +19,7 @@
 <!-- PROJECT DESCRIPTION -->
 
 # 📖 ToDO List-Project: To Do List <a name="about-project"></a>
+**ToDoList-App** This is the tasks website where you create, update read and remove task from a list.
 
 
 ## 🛠 Built With <a name="built-with"></a>
@@ -28,18 +29,6 @@
     ES6
 
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- LIVE DEMO -->
-
-## 🚀 Live Demo <a name="live-demo"></a>
-
-[Live Demo]()
-
-<!--Video-->
-
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 <!-- GETTING STARTED -->
@@ -119,10 +108,14 @@ It will be deployed after merge
 
 Contributions, issues, and feature requests are welcome!
 
+Feel free to check the [issues page](https://github.com/wolterbwambale/To-do-ist/issues/).
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- SUPPORT -->
+
+
 
 ## ⭐️ Show your support <a name="support"></a>
 
