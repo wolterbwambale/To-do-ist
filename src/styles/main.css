@@ -48,7 +48,7 @@ ul {
 }
 
 li {
-  padding: 10px;
+  padding: 15px;
   font-size: 16px;
   border: 1px solid #eee;
   display: flex;
@@ -92,46 +92,14 @@ li:last-child {
   margin: 0 auto;
 }
 
-.task-checkbox {
-  display: none;
-}
-
-.task-checkbox + .task-text {
-  font-size: 16px;
-}
-
-.task-checkbox:checked + .task-text {
-  text-decoration: line-through;
-  color: #aaa;
-}
-
-.task-checkbox + .task-text::before {
-  content: '';
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  margin-right: 10px;
-  border: 1px solid #aaa;
-  border-radius: 2%;
-  vertical-align: middle;
-  cursor: pointer;
-}
-
-.task-checkbox:checked + .task-text::before {
-  content: '✓';
-  color: #0074d9;
-  text-align: center;
-  line-height: 16px;
-}
-
 .fa-ellipsis-v {
   color: #ccc;
-  cursor: pointer;
+  cursor: move;
 }
 
 .fa-ellipsis-v:hover {
   color: #333;
-  cursor: pointer;
+  cursor: move;
 }
 
 .fa-level-down-alt {
@@ -158,17 +126,71 @@ li:last-child {
 
 .fa-sync:hover {
   color: #333;
-  cursor: pointer;
+  cursor: move;
 }
 
 #update {
-  display: none;
+  display: block;
   position: absolute;
   margin-left: 25%;
 }
 
 .delete-btn {
-  margin-left: 30%;
+  margin-left: 32%;
   display: block;
   position: absolute;
+}
+
+.task-text {
+  flex-grow: 1;
+  display: inline-block;
+}
+
+.update-btn {
+  width: 40px;
+  display: inline-block;
+}
+
+li button.update-btn {
+  margin-left: 27%;
+  display: block;
+  position: absolute;
+}
+
+li input[type="text"] {
+  display: inline-block;
+  width: 150px;
+  margin-right: 10px;
+}
+
+.task-checkbox {
+  display: none;
+}
+
+.task-checkbox + .task-text::before {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 10px;
+  border: 1px solid #aaa;
+  border-radius: 2%;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.task-checkbox:checked + .task-text {
+  text-decoration: line-through;
+  color: #aaa;
+}
+
+.task-checkbox:checked + .task-text::before {
+  content: '✓';
+  color: #0074d9;
+  text-align: center;
+  line-height: 16px;
+}
+
+.task-text + .task-checkbox {
+  font-size: 16px;
 }
