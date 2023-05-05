@@ -60,7 +60,19 @@ li:last-child {
   border-bottom: none;
 }
 
-button {
+.delet-btn {
+  background-color: #999595;
+  color: #fff;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 12px 10px;
+  width: 100%;
+  font-size: 16px;
+}
+
+.add-btn {
+  display: none;
   background-color: #999595;
   color: #fff;
   border: none;
@@ -147,4 +159,14 @@ button {
 .fa-sync:hover {
   color: #333;
   cursor: pointer;
+}
+
+#update {
+  display: none;
+}
+
+.delete-btn {
+  margin-left: 30%;
+  display: block;
+  position: absolute;
 }

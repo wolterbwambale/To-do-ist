@@ -1,32 +1,29 @@
-/* eslint-disable import/prefer-default-export */
-const todoList = [
-  {
-    description: 'Wash the dishes',
+const STORAGE_KEY = 'todos';
+
+export function readTask() {
+  const todos = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+  return todos;
+}
+
+export function createTask(text) {
+  const todos = readTask();
+  const newTask = {
+    text,
     completed: false,
-    index: 0,
-  },
-  {
-    description: 'Complete Todo project',
-    completed: true,
-    index: 1,
-  },
-];
+  };
+  todos.push(newTask);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+  return newTask;
+}
 
-export function displayTodoList() {
-  const todoListElement = document.getElementById('todo-list');
-  todoListElement.innerHTML = '';
-  todoList.forEach((task) => {
-    const taskElement = document.createElement('li');
-    taskElement.innerHTML = `
-        <label>
-          <input type="checkbox" class="task-checkbox" ${task.completed ? 'checked' : ''}>
-          <span class="task-text">${task.description}
+export function updateTask(index, newText) {
+  const todos = readTask();
+  todos[index].text = newText;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+}
 
-
-          
-        </label><i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-
-      `;
-    todoListElement.appendChild(taskElement);
-  });
+export function deleteTask(index) {
+  const todos = readTask();
+  todos.splice(index, 1);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
 }
