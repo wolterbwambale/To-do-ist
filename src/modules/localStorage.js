@@ -14,5 +14,10 @@ export function updateTask(index, updatedTask) {
 export function deleteTask(index) {
   const todos = readTask();
   todos.splice(index, 1);
+
+  for (let i = index; i < todos.length; i += 1) {
+    todos[i].index = i;
+  }
+
   localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
 }
