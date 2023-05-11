@@ -1,14 +1,8 @@
+/* eslint-disable */
+import { readTask } from './localStorage.js';
+import { renderTasks } from '../index.js';
+
 let dragIndex;
-
-function readTask() {
-  const tasks = localStorage.getItem('tasks');
-  return tasks ? JSON.parse(tasks) : [];
-}
-
-function renderTasks() {
-  // Define the renderTasks function
-  // ...
-}
 
 export function handleDragStart(event) {
   dragIndex = parseInt(event.currentTarget.dataset.index, 10);

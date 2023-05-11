@@ -7,17 +7,33 @@ export function readTask() {
 
 export function updateTask(index, updatedTask) {
   const tasks = readTask();
-  tasks[index] = updatedTask;
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+
+  if (index >= 0 && index < tasks.length) {
+    tasks[index] = { ...tasks[index], ...updatedTask };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+  } else {
+    console.error('Invalid index for updating task:', index);
+  }
 }
 
 export function deleteTask(index) {
   const todos = readTask();
-  todos.splice(index, 1);
 
-  for (let i = index; i < todos.length; i += 1) {
-    todos[i].index = i;
+  if (index >= 0 && index < todos.length) {
+    todos.splice(index, 1);
+
+    for (let i = 0; i < todos.length; i += 1) {
+      todos[i].index = i;
+    }
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+  } else {
+    console.error('Invalid index for deleting task:', index);
   }
-
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
 }
+
+export default {
+  updateTask,
+  deleteTask,
+  readTask,
+};
