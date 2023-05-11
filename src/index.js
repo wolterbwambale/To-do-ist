@@ -1,16 +1,17 @@
-/* eslint-disable*/
+/* eslint-disable */
 import './styles/main.css';
 import {createTask} from './modules/AddTodo.js';
-import {handleUpdateBtnClick } from './modules/EditTodo.js';
-import { readTask, updateTask, deleteTask } from './modules/localStorage.js';
+import { handleUpdateBtnClick } from './modules/EditTodo.js';
+import { readTask,updateTask, deleteTask } from './modules/localStorage.js';
+import { handleDragStart, handleDragOver, handleDrop } from './modules/moveDrag.js';
+import {clearCompleted} from './modules/clearComplete.js'
 
-const task=updateTask();
 
 const todoInput = document.querySelector('#todo-input');
 const todoList = document.querySelector('#todo-list');
 const deleteBtn = document.querySelector('.delet-btn');
+const clearCompletedBtn = document.querySelector('#clear-completed-btn');
 
-// Render the list of tasks
 function renderTasks() {
   const tasks = readTask();
   todoList.innerHTML = '';
@@ -25,17 +26,21 @@ function renderTasks() {
       <button type="button" class="delete-btn" data-index="${index}"><i class='far fa-trash-alt'></i></button>
       <i class='fas fa-ellipsis-v'></i>
     `;
+    li.draggable = true;
+    li.addEventListener('dragstart', handleDragStart);
+    li.addEventListener('dragover', handleDragOver);
+    li.addEventListener('drop', handleDrop);
     li.style.display = 'flex';
     li.style.alignItems = 'center';
     const taskText = li.querySelector('.task-text');
     taskText.style.flexGrow = '1';
     taskText.style.display = 'block';
     const deleteBtn = li.querySelector('.delete-btn');
-    deleteBtn.style.display = 'none'; // Initially hide the delete button
+    deleteBtn.style.display = 'none';
     deleteBtn.addEventListener('click', handleDeleteBtnClick);
     const updateBtn = li.querySelector('.update-btn');
     updateBtn.style.width = '40px';
-    updateBtn.style.display = 'none'; // Initially hide the update button
+    updateBtn.style.display = 'none';
     updateBtn.addEventListener('click', handleUpdateBtnClick);
     const ellipsisIcon = li.querySelector('.fa-ellipsis-v');
     ellipsisIcon.addEventListener('click', () => {
@@ -46,12 +51,9 @@ function renderTasks() {
   });
 }
 
-
-
-
-// Handle click event on the delete button
 function handleDeleteBtnClick(event) {
-  const { index } = event.currentTarget.dataset;
+  const li = event.currentTarget.closest('li');
+  const index = li.querySelector('.delete-btn').dataset.index;
   deleteTask(index);
   renderTasks();
 }
@@ -74,3 +76,28 @@ deleteBtn.addEventListener('click', () => {
 });
 
 renderTasks();
+// readTask();
+updateTask();
+
+clearCompletedBtn.addEventListener("click", clearCompleted);
+todoList.addEventListener("change", function(event) {
+  if (event.target.matches("input[type='checkbox']")) {
+    const checkbox = event.target;
+    const listItem = checkbox.closest("li"); 
+    const index = checkbox.dataset.index;
+    const tasks = readTask();
+
+    tasks[index].completed = checkbox.checked;
+    updateTask(index, tasks[index]); 
+
+    if (checkbox.checked) {
+      listItem.classList.add("completed"); 
+    } else {
+      listItem.classList.remove("completed");
+    }
+  }
+});
+
+
+
+export { renderTasks };
