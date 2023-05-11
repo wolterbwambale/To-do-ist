@@ -2,8 +2,10 @@
 import './styles/main.css';
 import {createTask} from './modules/AddTodo.js';
 import { handleUpdateBtnClick } from './modules/EditTodo.js';
-import { readTask,updateTask, deleteTask} from './modules/localStorage.js';
+import { readTask,updateTask, deleteTask } from './modules/localStorage.js';
 import { handleDragStart, handleDragOver, handleDrop } from './modules/moveDrag.js';
+import {clearCompleted} from './modules/clearComplete.js'
+
 
 const todoInput = document.querySelector('#todo-input');
 const todoList = document.querySelector('#todo-list');
@@ -78,18 +80,6 @@ renderTasks();
 updateTask();
 
 clearCompletedBtn.addEventListener("click", clearCompleted);
-
-function clearCompleted() {
-  const tasks = readTask();
-  const updatedTasks = tasks.filter(task => !task.completed);
-  updatedTasks.forEach((task, index) => {
-    task.id = index; 
-  });
-  updateTask(updatedTasks); 
-  renderTasks(); 
-}
-
-// Add event listener to each checkbox
 todoList.addEventListener("change", function(event) {
   if (event.target.matches("input[type='checkbox']")) {
     const checkbox = event.target;
@@ -98,7 +88,7 @@ todoList.addEventListener("change", function(event) {
     const tasks = readTask();
 
     tasks[index].completed = checkbox.checked;
-    updateTask(tasks); 
+    updateTask(index, tasks[index]); 
 
     if (checkbox.checked) {
       listItem.classList.add("completed"); 
@@ -107,6 +97,7 @@ todoList.addEventListener("change", function(event) {
     }
   }
 });
+
 
 
 export { renderTasks };

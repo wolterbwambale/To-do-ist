@@ -1,16 +1,26 @@
 export const STORAGE_KEY = 'todos';
 
 export function readTask() {
-  const todos = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+  const storedData = localStorage.getItem(STORAGE_KEY);
+  let todos = [];
+
+  try {
+    if (storedData) {
+      todos = JSON.parse(storedData);
+    }
+  } catch (error) {
+    console.error('Error parsing JSON data:', error);
+  }
+
   return todos;
 }
 
 export function updateTask(index, updatedTask) {
-  const tasks = readTask();
+  const todos = readTask();
 
-  if (index >= 0 && index < tasks.length) {
-    tasks[index] = { ...tasks[index], ...updatedTask };
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+  if (index >= 0 && index < todos.length) {
+    todos[index] = { ...todos[index], ...updatedTask };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
   } else {
     console.error('Invalid index for updating task:', index);
   }
