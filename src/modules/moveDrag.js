@@ -4,17 +4,17 @@ import { renderTasks } from '../index.js';
 
 let dragIndex;
 
-export function handleDragStart(event) {
+export const handleDragStart = (event) => {
   dragIndex = parseInt(event.currentTarget.dataset.index, 10);
   event.dataTransfer.setData('text/plain', dragIndex);
-}
+};
 
-export function handleDragOver(event) {
+export const handleDragOver = (event) => {
   event.preventDefault();
   event.dataTransfer.dropEffect = 'move';
-}
+};
 
-export function handleDrop(event) {
+export const handleDrop = (event) => {
   const dropIndex = parseInt(event.currentTarget.dataset.index, 10);
   if (dragIndex !== dropIndex) {
     const tasks = readTask();
@@ -23,6 +23,6 @@ export function handleDrop(event) {
     localStorage.setItem('tasks', JSON.stringify(tasks));
     renderTasks();
   }
-}
+};
 
 export default { handleDragStart, handleDragOver, handleDrop };
