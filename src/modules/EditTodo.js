@@ -2,7 +2,7 @@
 import { readTask, updateTask } from './localStorage.js';
 import { renderTasks } from '../index.js';
 
-export function handleUpdateBtnClick(event) {
+export const handleUpdateBtnClick = (event) => {
   const index = parseInt(event.target.dataset.index);
   const tasks = readTask();
   const task = tasks[index];
@@ -26,7 +26,7 @@ export function handleUpdateBtnClick(event) {
     taskTextSpan.style.display = 'none';
   }
 
-  function handleUpdate() {
+  const handleUpdate = () => {
     const newTaskText = input.value.trim();
     if (newTaskText && newTaskText !== taskText) {
       task.text = newTaskText;
@@ -34,20 +34,20 @@ export function handleUpdateBtnClick(event) {
       renderTasks();
     }
     cleanup();
-  }
+  };
 
-  function handleCancel() {
+  const handleCancel = () => {
     cleanup();
-  }
+  };
 
-  function cleanup() {
+  const cleanup = () => {
     li.removeChild(input);
     li.removeChild(updateBtn);
     event.target.style.display = '';
     if (taskTextSpan) {
       taskTextSpan.style.display = '';
     }
-  }
+  };
 
   updateBtn.addEventListener('click', handleUpdate);
   updateBtn.addEventListener('blur', handleCancel);
@@ -58,6 +58,6 @@ export function handleUpdateBtnClick(event) {
       handleCancel();
     }
   });
-}
+};
 
 export default handleUpdateBtnClick;

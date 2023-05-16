@@ -2,7 +2,7 @@
 import { renderTasks } from '../index.js';
 import { readTask, updateTask } from './localStorage.js';
 
-export function clearCompleted() {
+export const clearCompleted = () => {
   const tasks = readTask();
   const updatedTasks = tasks.filter((task) => !task.completed);
   updatedTasks.forEach((task, index) => {
@@ -10,6 +10,6 @@ export function clearCompleted() {
   });
   updateTask(updatedTasks);
   renderTasks();
-}
+};
 
 export default clearCompleted;
